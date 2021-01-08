@@ -8,16 +8,15 @@ made by imgradeone and DokiMod
     return Reply
 end
 
-function dokimod_init(msg)
-    path_base = dice.DiceDir() .. "/dokimod"
-    if (dice.mkDir(path_base) ~= 0) then
-        rv = dice.mkDir(path_base)
-
-end
+-- function dokimod_init(msg)
+--     path_base = dice.DiceDir() .. "/dokimod"
+--     if (dice.mkDir(path_base) ~= 0) then
+--         rv = dice.mkDir(path_base)
+-- end
 
 function dokimod_apply(Msg)
 end
 
 -- command["(\\.|。)dokimod[\\s\\S]*"] = "dokimod_about"
 command["(\\.|。)dokimod\\s?(about|info)?"] = "dokimod_about"
-command["(\\.|。)dokimod\\s(init)"] = "dokimod_init"
+-- command["(\\.|。)dokimod\\s(init)"] = "dokimod_init"
