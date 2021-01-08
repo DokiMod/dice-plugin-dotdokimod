@@ -20,14 +20,14 @@ end
 
 function dokimod_board(msg)
     rv = ""
-    boardPath = dice.DiceDir() .. "\\dokimod_ext\\board"
-    file_path = boardPath .. "hitokoto_" .. dice.int2string(Msg.fromQQ) .. ".json"
+    boardPath = dice.DiceDir() .. "\\dokimod_ext\\board\\"
+    file_path = boardPath .. "board.txt"
     if(dice.mkDir(boardPath) == 0)
     then
         url = "https://dokimod.cn/api/announcement"
         dice.fDownWebPage(url, file_path)
         file = io.open(file_path, "r")
-        rv = file:read()
+        rv = file:read() -- fixit
         file:close()
         -- rv = "『" .. dice.fGetJson(file_path, "啥也没有", "hitokoto") .. "』"
         -- rv = rv .. "\n" .. dice.fGetJson(file_path, "不明", "from").. " - " .. dice.fGetJson(file_path, "不明", "from_who")
