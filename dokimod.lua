@@ -4,6 +4,18 @@ function mkDirs(path)
     os.execute('mkdir "' .. path .. '"')
 end
 
+function read_file(path)
+    local text = ""
+    local file = io.open(path, "r") -- 打开了文件读写路径
+    if (file ~= nil) then -- 如果文件不是空的
+        text = file.read(file, "*a") -- 读取内容
+        io.close(file) -- 关闭文件
+    else
+        text = "获取失败 X"
+    end
+    return text
+end
+
 function dokimod_about(Msg)
     Reply = [[OlivaDice (DIXE) 插件 .DokiMod
 版本 v0.1-alpha
@@ -19,20 +31,19 @@ function dokimod_init(msg)
 end
 
 function dokimod_board(msg)
-    rv = ""
     boardPath = dice.DiceDir() .. "\\dokimod_ext\\board\\"
-    file_path = boardPath .. "board.txt"
+    FilePath = boardPath .. "board.txt"
     if(dice.mkDir(boardPath) == 0)
     then
-        url = "https://dokimod.cn/api/announcement"
-        dice.fDownWebPage(url, file_path)
-        file = io.open(file_path, "r")
-        rv = file:read() -- fixit
-        file:close()
-        -- rv = "『" .. dice.fGetJson(file_path, "啥也没有", "hitokoto") .. "』"
-        -- rv = rv .. "\n" .. dice.fGetJson(file_path, "不明", "from").. " - " .. dice.fGetJson(file_path, "不明", "from_who")
+        url = "https://cdn.jsdelivr.net/gh/DokiMod/Mitana-API@main/announcement"
+        rv = dice.fDownWebPage(url, FilePath)
+        if (rv == 0) then
+            board = read_file(FilePath)
+            return board
+        else
+            return "获取失败 X" -- help me fix it
+        end
     end
-    return rv
 end
 
 -- function dokimod_apply(Msg)
