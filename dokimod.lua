@@ -15,7 +15,7 @@ end
 function dokimod_init(msg)
     pathInit = dice.DiceDir() .. "\\dokimod_ext"
     mkDirs(pathInit)
-    return "DokiMod 插件 初始化成功（？"
+    return "DokiMod 插件 初始化成功"
 end
 
 function dokimod_board(msg)
